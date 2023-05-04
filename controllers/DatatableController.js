@@ -1,4 +1,4 @@
-const db = require("../models/index");
+const db = require("../models/Index");
 const { Sequelize, Op, QueryTypes, Model } = require("sequelize");
 
 const Users = db.Users;

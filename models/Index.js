@@ -44,12 +44,12 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-db.Users = require("./users")(sequelize, Sequelize.DataTypes);
-db.Posts = require("./post")(sequelize, Sequelize.DataTypes);
-db.tags = require("./tags")(sequelize, Sequelize.DataTypes);
-db.event = require("./event")(sequelize, Sequelize.DataTypes);
-db.employee = require("./employee")(sequelize, Sequelize.DataTypes);
-db.Event_tags = require("./event_tags")(sequelize, Sequelize.DataTypes);
+db.Users = require("./Users")(sequelize, Sequelize.DataTypes);
+db.Posts = require("./Post")(sequelize, Sequelize.DataTypes);
+db.tags = require("./Tags")(sequelize, Sequelize.DataTypes);
+db.event = require("./Event")(sequelize, Sequelize.DataTypes);
+db.employee = require("./Employee")(sequelize, Sequelize.DataTypes);
+db.Event_tags = require("./Event_Tags")(sequelize, Sequelize.DataTypes);
 
 
 //one to one relationship example

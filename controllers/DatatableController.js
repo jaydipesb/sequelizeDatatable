@@ -75,14 +75,11 @@ const getAllUsers = async (request, res) => {
       where: searchData,
     });
 
-    queryData.forEach(function (row) {
-      data_arr.push(row);
-    });
     responceData = {
       draw: draw,
       iTotalRecords: totalRecord,
       iTotalDisplayRecords: searchResult,
-      aaData: data_arr,
+      aaData: queryData,
     };
     res.json(responceData);
   } catch (error) {

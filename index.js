@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 //routers
-const datatableROute = require("./routes/datatableRoutes");
+const datatableROute = require("./routes/DatatableRoutes");
 
 
 // app.use("/users", router);

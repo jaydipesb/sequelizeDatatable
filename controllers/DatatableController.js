@@ -17,7 +17,6 @@ const getAllUsers = async (request, res) => {
       column_index,
       searchResult;
     let orderData = [];
-    let data_arr = [];
 
     if (typeof order == "undefined") {
       column_name = "id";

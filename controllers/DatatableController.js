@@ -1,5 +1,3 @@
-const employee = require("../models/employee");
-const event = require("../models/event");
 const db = require("../models/index");
 const { Sequelize, Op, QueryTypes, Model } = require("sequelize");
 
@@ -43,15 +41,23 @@ const getAllUsers = async (request, res) => {
 
     search_value = request.query.search["value"];
     totalRecord = await Users.count();
+    let searchData = {
+      [Op.or]: [
+        { name: { [Op.like]: "%" + search_value + "%" } },
+        { email: { [Op.like]: "%" + search_value + "%" } },
+        { gender: { [Op.like]: "%" + search_value + "%" } },
+        { "$postdetails.title$": { [Op.like]: "%" + search_value + "%" } },
+      ],
+    };
 
     searchResult = await Users.count({
-      where: {
-        [Op.or]: [
-          { name: { [Op.like]: "%" + search_value + "%" } },
-          { email: { [Op.like]: "%" + search_value + "%" } },
-          { gender: { [Op.like]: "%" + search_value + "%" } },
-        ],
-      },
+      include: [
+        {
+          model: Posts,
+          as: "postdetails",
+        },
+      ],
+      where: searchData,
     });
 
     total_records_with_filter = searchResult;
@@ -66,14 +72,7 @@ const getAllUsers = async (request, res) => {
         },
       ],
       order: [orderData],
-      where: {
-        [Op.or]: [
-          { name: { [Op.like]: "%" + search_value + "%" } },
-          { email: { [Op.like]: "%" + search_value + "%" } },
-          { gender: { [Op.like]: "%" + search_value + "%" } },
-          { "$postdetails.title$": { [Op.like]: "%" + search_value + "%" } },
-        ],
-      },
+      where: searchData,
     });
 
     queryData.forEach(function (row) {
